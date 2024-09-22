@@ -17,6 +17,3 @@ class TOSConfig(AppConfig):
             pre_save.connect(invalidate_cached_agreements,
                              sender=TermsOfService,
                              dispatch_uid='invalidate_cached_agreements')
-
-            # Create the TOS key version immediately
-            invalidate_cached_agreements(TermsOfService)
