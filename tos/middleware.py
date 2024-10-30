@@ -59,7 +59,7 @@ class UserAgreementMiddleware(MiddlewareMixin):
             # so we need to set them here.
             request.session['tos_user'] = user_id
             request.session['tos_backend'] = request.session['_auth_user_backend']
-
+ 
             response = HttpResponseRedirect('{}?{}={}'.format(
                 tos_check_url,
                 REDIRECT_FIELD_NAME,
@@ -81,6 +81,8 @@ class UserAgreementMiddleware(MiddlewareMixin):
             return True
 
         # Don't redirect users when they're trying to get to the confirm page
+        import logging
+        logging.getLogger(__name__).warning(f"{request.path_info = }")
         if request.path_info == tos_check_url:
             return True
 

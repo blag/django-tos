@@ -184,6 +184,11 @@ class BumpCoverage(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
+    def test_skip_for_anonymous_user(self):
+        response = self.client.get(reverse('index'))
+
+        self.assertEqual(response.status_code, 200)
+
     def test_invalidate_cached_agreements(self):
         cache = caches[getattr(settings, 'TOS_CACHE_NAME', 'default')]
 
